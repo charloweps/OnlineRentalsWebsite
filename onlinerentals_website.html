@@ -1,0 +1,2317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>OnlineRentals | Property Management Made Simple</title>
+
+    <meta
+        name="description"
+        content="OnlineRentals is a property management system for managing properties, units, tenants, billing, payments, operations and financial information in one place."
+    >
+
+    <style>
+        :root {
+            --navy: #17212b;
+            --navy-2: #202d39;
+            --blue: #2563eb;
+            --blue-dark: #1d4ed8;
+            --blue-soft: #eff6ff;
+            --text: #17212b;
+            --muted: #667085;
+            --border: #e4e7ec;
+            --background: #f8fafc;
+            --white: #ffffff;
+            --success: #12b76a;
+            --warning: #f79009;
+            --radius: 18px;
+            --shadow: 0 12px 35px rgba(16, 24, 40, .08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            color: var(--text);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,.94);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(228,231,236,.9);
+        }
+
+        .nav {
+            min-height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: -.02em;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            color: white;
+            background: var(--navy);
+        }
+
+        .brand-mark svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 27px;
+            color: #475467;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a {
+            transition: color .2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--blue);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            min-height: 43px;
+            padding: 0 17px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid transparent;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            color: white;
+            background: var(--blue);
+            box-shadow: 0 5px 15px rgba(37,99,235,.18);
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-dark);
+        }
+
+        .btn-secondary {
+            color: var(--text);
+            background: white;
+            border-color: var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 92px 0 80px;
+            background:
+                radial-gradient(
+                    circle at 82% 10%,
+                    rgba(37,99,235,.10),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #f8fafc 100%
+                );
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.02fr .98fr;
+            align-items: center;
+            gap: 70px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--blue);
+            background: var(--blue-soft);
+            border: 1px solid #dbeafe;
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--blue);
+        }
+
+        .hero h1 {
+            margin: 21px 0 19px;
+            font-size: clamp(42px, 5vw, 67px);
+            line-height: 1.04;
+            letter-spacing: -.045em;
+            max-width: 720px;
+        }
+
+        .hero h1 span {
+            color: var(--blue);
+        }
+
+        .hero-text {
+            max-width: 620px;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 31px;
+        }
+
+        .hero-note {
+            margin-top: 22px;
+            color: #98a2b3;
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           DASHBOARD PREVIEW
+        ===================================================== */
+
+        .dashboard-preview {
+            position: relative;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: 0 28px 70px rgba(16,24,40,.13);
+            overflow: hidden;
+        }
+
+        .preview-topbar {
+            height: 51px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0 17px;
+            border-bottom: 1px solid var(--border);
+            background: #fbfcfd;
+        }
+
+        .preview-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d0d5dd;
+        }
+
+        .preview-content {
+            display: grid;
+            grid-template-columns: 125px 1fr;
+            min-height: 390px;
+        }
+
+        .preview-sidebar {
+            padding: 19px 12px;
+            background: var(--navy);
+        }
+
+        .preview-side-logo {
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 7px 8px 20px;
+        }
+
+        .preview-side-item {
+            color: #c8d0d8;
+            padding: 9px 8px;
+            border-radius: 7px;
+            font-size: 10px;
+            margin-bottom: 3px;
+        }
+
+        .preview-side-item.active {
+            color: white;
+            background: rgba(255,255,255,.10);
+        }
+
+        .preview-main {
+            padding: 22px;
+            background: #f8fafc;
+        }
+
+        .preview-title {
+            font-weight: 800;
+            font-size: 19px;
+            margin-bottom: 4px;
+        }
+
+        .preview-subtitle {
+            color: var(--muted);
+            font-size: 10px;
+            margin-bottom: 20px;
+        }
+
+        .preview-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 9px;
+            margin-bottom: 14px;
+        }
+
+        .preview-stat {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 13px;
+        }
+
+        .preview-stat small {
+            display: block;
+            color: #98a2b3;
+            font-size: 8px;
+            margin-bottom: 5px;
+        }
+
+        .preview-stat strong {
+            font-size: 16px;
+        }
+
+        .preview-table {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            overflow: hidden;
+        }
+
+        .preview-table-header,
+        .preview-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr .7fr;
+            padding: 11px 13px;
+            font-size: 9px;
+        }
+
+        .preview-table-header {
+            color: #98a2b3;
+            background: #fbfcfd;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .preview-row {
+            border-bottom: 1px solid #f2f4f7;
+        }
+
+        .preview-row:last-child {
+            border-bottom: 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            width: fit-content;
+            padding: 3px 7px;
+            border-radius: 999px;
+            font-size: 7px;
+            font-weight: 800;
+        }
+
+        .badge-success {
+            color: #027a48;
+            background: #ecfdf3;
+        }
+
+        .badge-warning {
+            color: #b54708;
+            background: #fffaeb;
+        }
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .section {
+            padding: 92px 0;
+        }
+
+        .section-soft {
+            background: var(--background);
+        }
+
+        .section-heading {
+            max-width: 720px;
+            margin-bottom: 42px;
+        }
+
+        .section-heading.center {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .section-label {
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .section-heading h2 {
+            margin: 10px 0 13px;
+            font-size: clamp(30px, 4vw, 45px);
+            line-height: 1.12;
+            letter-spacing: -.035em;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        /* =====================================================
+           FEATURE CARDS
+        ===================================================== */
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card {
+            padding: 27px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            color: var(--blue);
+            background: var(--blue-soft);
+            border-radius: 12px;
+            margin-bottom: 19px;
+        }
+
+        .feature-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 9px;
+            font-size: 17px;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           HOW IT WORKS
+        ===================================================== */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .step {
+            position: relative;
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: white;
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: var(--navy);
+            color: white;
+            font-weight: 800;
+            font-size: 13px;
+            margin-bottom: 21px;
+        }
+
+        .step h3 {
+            margin: 0 0 8px;
+            font-size: 17px;
+        }
+
+        .step p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           PRODUCT AREAS
+        ===================================================== */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .product-card {
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: white;
+        }
+
+        .product-card h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+
+        .product-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .product-list {
+            list-style: none;
+            margin: 21px 0 0;
+            padding: 0;
+        }
+
+        .product-list li {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #475467;
+        }
+
+        .product-list svg {
+            flex: 0 0 auto;
+            width: 17px;
+            height: 17px;
+            color: var(--success);
+            margin-top: 2px;
+        }
+
+        /* =====================================================
+           ROLES
+        ===================================================== */
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .role {
+            padding: 22px 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: white;
+        }
+
+        .role strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .role span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           GUIDE
+        ===================================================== */
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .guide-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .guide-item {
+            display: flex;
+            gap: 15px;
+            padding: 17px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: white;
+        }
+
+        .guide-item-number {
+            width: 30px;
+            height: 30px;
+            flex: 0 0 30px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            color: var(--blue);
+            background: var(--blue-soft);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .guide-item strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .guide-item span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           SECURITY
+        ===================================================== */
+
+        .security {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .security-card {
+            padding: 30px;
+            border-radius: var(--radius);
+            background: var(--navy);
+            color: white;
+        }
+
+        .security-card h3 {
+            margin: 0 0 10px;
+            font-size: 21px;
+        }
+
+        .security-card p {
+            margin: 0;
+            color: #c8d0d8;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .security-points {
+            display: grid;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .security-point {
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            color: #e8edf2;
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           FAQ
+        ===================================================== */
+
+        .faq {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            border: 0;
+            background: transparent;
+            color: var(--text);
+            text-align: left;
+            font-weight: 750;
+            cursor: pointer;
+        }
+
+        .faq-question svg {
+            flex: 0 0 auto;
+            transition: transform .2s ease;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 45px 20px 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        .faq-item.open .faq-question svg {
+            transform: rotate(180deg);
+        }
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .cta {
+            padding: 80px 0;
+        }
+
+        .cta-card {
+            padding: 58px;
+            border-radius: 24px;
+            background: var(--navy);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cta-card::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: rgba(37,99,235,.18);
+            top: -220px;
+            right: -100px;
+        }
+
+        .cta-card h2 {
+            position: relative;
+            margin: 0 auto 13px;
+            max-width: 650px;
+            font-size: clamp(30px, 4vw, 45px);
+            line-height: 1.12;
+            letter-spacing: -.035em;
+        }
+
+        .cta-card p {
+            position: relative;
+            max-width: 620px;
+            margin: 0 auto;
+            color: #c8d0d8;
+        }
+
+        .cta-actions {
+            position: relative;
+            margin-top: 27px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 11px;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            padding: 50px 0 28px;
+            background: #f8fafc;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 45px;
+        }
+
+        .footer-brand p {
+            max-width: 330px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            margin: 0 0 13px;
+            font-size: 13px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .footer-column a:hover {
+            color: var(--blue);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            color: #98a2b3;
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 950px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+                border: 0;
+                background: transparent;
+                cursor: pointer;
+            }
+
+            .hero-grid,
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid,
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .roles-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1.5fr 1fr 1fr;
+            }
+
+            .dashboard-preview {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                width: min(100% - 28px, 1180px);
+            }
+
+            .nav {
+                min-height: 66px;
+            }
+
+            .nav-actions .btn-secondary {
+                display: none;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero-text {
+                font-size: 16px;
+            }
+
+            .preview-content {
+                grid-template-columns: 85px 1fr;
+            }
+
+            .preview-sidebar {
+                padding: 15px 8px;
+            }
+
+            .preview-main {
+                padding: 14px;
+            }
+
+            .feature-grid,
+            .steps,
+            .product-grid,
+            .security {
+                grid-template-columns: 1fr;
+            }
+
+            .roles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section {
+                padding: 65px 0;
+            }
+
+            .cta-card {
+                padding: 40px 22px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 460px) {
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .preview-stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<header class="site-header">
+    <div class="container nav">
+
+        <a href="#home" class="brand">
+            <span class="brand-mark">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2">
+                    <path d="M3 11.5 12 4l9 7.5"/>
+                    <path d="M5.5 10.5V20h13v-9.5"/>
+                    <path d="M9 20v-5h6v5"/>
+                </svg>
+            </span>
+
+            <span>OnlineRentals</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#guides">Guides</a>
+            <a href="#faq">FAQ</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a
+                href="{% url 'landlord:auth_view' %}"
+                class="btn btn-secondary"
+            >
+                Sign In
+            </a>
+
+            <a
+                href="#contact"
+                class="btn btn-primary"
+            >
+                Get Started
+            </a>
+        </div>
+
+        <button
+            class="mobile-menu"
+            type="button"
+            aria-label="Open navigation"
+            onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')"
+        >
+            <svg width="24" height="24" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6h16"/>
+                <path d="M4 12h16"/>
+                <path d="M4 18h16"/>
+            </svg>
+        </button>
+
+    </div>
+</header>
+
+
+<main>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero" id="home">
+
+    <div class="container hero-grid">
+
+        <div>
+
+            <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                Property Management System
+            </div>
+
+            <h1>
+                Property management
+                <span>made simple.</span>
+            </h1>
+
+            <p class="hero-text">
+                OnlineRentals brings properties, units, tenants,
+                billing, payments and financial management together
+                in one organized platform.
+            </p>
+
+            <div class="hero-actions">
+
+                <a
+                    href="{% url 'landlord:auth_view' %}"
+                    class="btn btn-primary"
+                >
+                    Sign In
+                </a>
+
+                <a
+                    href="#how-it-works"
+                    class="btn btn-secondary"
+                >
+                    See How It Works
+                </a>
+
+            </div>
+
+            <div class="hero-note">
+                One system for managing the day-to-day rental business.
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT PREVIEW -->
+
+        <div class="dashboard-preview">
+
+            <div class="preview-topbar">
+                <span class="preview-dot"></span>
+                <span class="preview-dot"></span>
+                <span class="preview-dot"></span>
+            </div>
+
+            <div class="preview-content">
+
+                <aside class="preview-sidebar">
+
+                    <div class="preview-side-logo">
+                        OnlineRentals
+                    </div>
+
+                    <div class="preview-side-item active">
+                        Overview
+                    </div>
+
+                    <div class="preview-side-item">
+                        Properties
+                    </div>
+
+                    <div class="preview-side-item">
+                        Tenants
+                    </div>
+
+                    <div class="preview-side-item">
+                        Finance
+                    </div>
+
+                    <div class="preview-side-item">
+                        Reports
+                    </div>
+
+                    <div class="preview-side-item">
+                        Operations
+                    </div>
+
+                </aside>
+
+                <div class="preview-main">
+
+                    <div class="preview-title">
+                        Property Overview
+                    </div>
+
+                    <div class="preview-subtitle">
+                        Monitor your rental property from one place.
+                    </div>
+
+                    <div class="preview-stat-grid">
+
+                        <div class="preview-stat">
+                            <small>UNITS</small>
+                            <strong>24</strong>
+                        </div>
+
+                        <div class="preview-stat">
+                            <small>OCCUPIED</small>
+                            <strong>21</strong>
+                        </div>
+
+                        <div class="preview-stat">
+                            <small>AVAILABLE</small>
+                            <strong>3</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="preview-table">
+
+                        <div class="preview-table-header">
+                            <span>Unit</span>
+                            <span>Tenant</span>
+                            <span>Status</span>
+                        </div>
+
+                        <div class="preview-row">
+                            <span>House 01</span>
+                            <span>Tenant</span>
+                            <span>
+                                <span class="badge badge-success">
+                                    Occupied
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="preview-row">
+                            <span>House 02</span>
+                            <span>Tenant</span>
+                            <span>
+                                <span class="badge badge-success">
+                                    Occupied
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="preview-row">
+                            <span>House 03</span>
+                            <span>—</span>
+                            <span>
+                                <span class="badge badge-warning">
+                                    Vacant
+                                </span>
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEATURES
+========================================================= -->
+
+<section class="section" id="features">
+
+    <div class="container">
+
+        <div class="section-heading center">
+
+            <div class="section-label">
+                Everything in one place
+            </div>
+
+            <h2>
+                The tools you need to manage rental property.
+            </h2>
+
+            <p>
+                OnlineRentals connects the different parts of
+                property management so that information is easier
+                to organize, understand and act on.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <path d="M3 10.5 12 3l9 7.5"/>
+                        <path d="M5 9.5V21h14V9.5"/>
+                        <path d="M9 21v-6h6v6"/>
+                    </svg>
+                </div>
+
+                <h3>Property Management</h3>
+
+                <p>
+                    Organize properties, units, occupancy and
+                    property information from one central system.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="8" r="3"/>
+                        <path d="M3 20c0-3.3 2.7-6 6-6"/>
+                        <path d="M15 11c3.3 0 6 2.7 6 6"/>
+                        <path d="M15 5a3 3 0 0 1 0 6"/>
+                    </svg>
+                </div>
+
+                <h3>Tenant Management</h3>
+
+                <p>
+                    Register tenants, allocate units, maintain
+                    tenant information and follow rental accounts.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="5" width="18" height="14" rx="2"/>
+                        <path d="M7 15h.01"/>
+                        <path d="M11 15h6"/>
+                    </svg>
+                </div>
+
+                <h3>Billing & Invoices</h3>
+
+                <p>
+                    Manage monthly invoices, recurring charges,
+                    arrears, prepayments and outstanding balances.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <path d="M12 3v18"/>
+                        <path d="M17 7H9.5a2.5 2.5 0 0 0 0 5H14.5a2.5 2.5 0 0 1 0 5H7"/>
+                    </svg>
+                </div>
+
+                <h3>Payment Tracking</h3>
+
+                <p>
+                    Keep payment transactions connected to the
+                    appropriate rental account and invoice.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <path d="M4 19V5"/>
+                        <path d="M4 19h16"/>
+                        <path d="m7 15 3-4 3 2 5-6"/>
+                    </svg>
+                </div>
+
+                <h3>Financial Management</h3>
+
+                <p>
+                    Understand revenue, expenses, arrears,
+                    prepayments and other financial information.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <path d="M12 3v18"/>
+                        <path d="M5 8h14"/>
+                        <path d="M5 16h14"/>
+                        <circle cx="12" cy="8" r="2"/>
+                        <circle cx="12" cy="16" r="2"/>
+                    </svg>
+                </div>
+
+                <h3>Controlled Access</h3>
+
+                <p>
+                    Give users access to the information and
+                    property areas relevant to their responsibilities.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section class="section section-soft" id="how-it-works">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="section-label">
+                How it works
+            </div>
+
+            <h2>
+                From property setup to financial reporting.
+            </h2>
+
+            <p>
+                OnlineRentals follows the natural workflow of
+                rental property management.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <article class="step">
+                <div class="step-number">01</div>
+                <h3>Set up your properties</h3>
+                <p>
+                    Add properties and define the rental units
+                    that belong to each property.
+                </p>
+            </article>
+
+            <article class="step">
+                <div class="step-number">02</div>
+                <h3>Configure your units</h3>
+                <p>
+                    Organize unit information, rental terms,
+                    deposits and recurring charges.
+                </p>
+            </article>
+
+            <article class="step">
+                <div class="step-number">03</div>
+                <h3>Register tenants</h3>
+                <p>
+                    Register tenants and allocate them to
+                    available rental units.
+                </p>
+            </article>
+
+            <article class="step">
+                <div class="step-number">04</div>
+                <h3>Manage billing</h3>
+                <p>
+                    Manage monthly invoices, recurring bills,
+                    arrears and prepayments.
+                </p>
+            </article>
+
+            <article class="step">
+                <div class="step-number">05</div>
+                <h3>Track payments</h3>
+                <p>
+                    Keep payment transactions associated with
+                    the appropriate rental accounts.
+                </p>
+            </article>
+
+            <article class="step">
+                <div class="step-number">06</div>
+                <h3>Review performance</h3>
+                <p>
+                    Use financial and operational information
+                    to understand how your properties are performing.
+                </p>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PRODUCT AREAS
+========================================================= -->
+
+<section class="section" id="product">
+
+    <div class="container">
+
+        <div class="section-heading center">
+
+            <div class="section-label">
+                One connected system
+            </div>
+
+            <h2>
+                Built around the way rental properties are managed.
+            </h2>
+
+        </div>
+
+
+        <div class="product-grid">
+
+            <article class="product-card">
+
+                <h3>Properties & Units</h3>
+
+                <p>
+                    Keep your properties organized and understand
+                    what is happening at individual unit level.
+                </p>
+
+                <ul class="product-list">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Property and unit organization
+                    </li>
+
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Occupancy and vacancy information
+                    </li>
+
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Unit-level rental information
+                    </li>
+                </ul>
+
+            </article>
+
+
+            <article class="product-card">
+
+                <h3>Tenants & Accounts</h3>
+
+                <p>
+                    Maintain tenant information and connect tenants
+                    to the units and financial records that matter.
+                </p>
+
+                <ul class="product-list">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Tenant registration
+                    </li>
+
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Unit allocation
+                    </li>
+
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Tenant account information
+                    </li>
+                </ul>
+
+            </article>
+
+
+            <article class="product-card">
+
+                <h3>Billing & Payments</h3>
+
+                <p>
+                    Follow the financial lifecycle from invoice
+                    generation through payment and account balance.
+                </p>
+
+                <ul class="product-list">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Monthly invoices
+                    </li>
+
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Recurring property and unit charges
+                    </li>
+
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Payments, arrears and prepayments
+                    </li>
+                </ul>
+
+            </article>
+
+
+            <article class="product-card">
+
+                <h3>Finance & Reporting</h3>
+
+                <p>
+                    Turn day-to-day rental transactions into
+                    information that supports better decisions.
+                </p>
+
+                <ul class="product-list">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Revenue information
+                    </li>
+
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Expenditure information
+                    </li>
+
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="m5 12 4 4L19 6"/>
+                        </svg>
+                        Financial and operational reporting
+                    </li>
+                </ul>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ROLES
+========================================================= -->
+
+<section class="section section-soft">
+
+    <div class="container">
+
+        <div class="section-heading center">
+
+            <div class="section-label">
+                Built for different responsibilities
+            </div>
+
+            <h2>
+                Everyone sees what they need.
+            </h2>
+
+            <p>
+                OnlineRentals supports different types of users
+                while keeping access to property information controlled.
+            </p>
+
+        </div>
+
+
+        <div class="roles-grid">
+
+            <div class="role">
+                <strong>Landlords</strong>
+                <span>Property and financial management</span>
+            </div>
+
+            <div class="role">
+                <strong>Tenants</strong>
+                <span>Rental account information</span>
+            </div>
+
+            <div class="role">
+                <strong>Staff</strong>
+                <span>Assigned administrative tasks</span>
+            </div>
+
+            <div class="role">
+                <strong>Caretakers</strong>
+                <span>Assigned property operations</span>
+            </div>
+
+            <div class="role">
+                <strong>Agents</strong>
+                <span>Assigned property responsibilities</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     GUIDES
+========================================================= -->
+
+<section class="section" id="guides">
+
+    <div class="container guide-grid">
+
+        <div>
+
+            <div class="section-label">
+                Getting started
+            </div>
+
+            <h2>
+                Learn how to use OnlineRentals.
+            </h2>
+
+            <p style="color:#667085; line-height:1.8;">
+                Whether you manage rental properties or use
+                OnlineRentals as a tenant, the system is organized
+                around the tasks you perform every day.
+            </p>
+
+        </div>
+
+
+        <div class="guide-list">
+
+            <div class="guide-item">
+                <div class="guide-item-number">01</div>
+                <div>
+                    <strong>Set up your property</strong>
+                    <span>
+                        Add the property and its rental units.
+                    </span>
+                </div>
+            </div>
+
+            <div class="guide-item">
+                <div class="guide-item-number">02</div>
+                <div>
+                    <strong>Configure rental information</strong>
+                    <span>
+                        Define the information needed to manage your units.
+                    </span>
+                </div>
+            </div>
+
+            <div class="guide-item">
+                <div class="guide-item-number">03</div>
+                <div>
+                    <strong>Add tenants</strong>
+                    <span>
+                        Register tenants and allocate available units.
+                    </span>
+                </div>
+            </div>
+
+            <div class="guide-item">
+                <div class="guide-item-number">04</div>
+                <div>
+                    <strong>Manage invoices</strong>
+                    <span>
+                        Follow monthly charges, arrears and balances.
+                    </span>
+                </div>
+            </div>
+
+            <div class="guide-item">
+                <div class="guide-item-number">05</div>
+                <div>
+                    <strong>Track payments</strong>
+                    <span>
+                        Review transactions against rental accounts.
+                    </span>
+                </div>
+            </div>
+
+            <div class="guide-item">
+                <div class="guide-item-number">06</div>
+                <div>
+                    <strong>Review reports</strong>
+                    <span>
+                        Understand property and financial performance.
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SECURITY
+========================================================= -->
+
+<section class="section section-soft" id="security">
+
+    <div class="container">
+
+        <div class="security">
+
+            <div class="security-card">
+
+                <h3>
+                    Information where it belongs.
+                </h3>
+
+                <p>
+                    Property management involves sensitive tenant,
+                    financial and operational information. OnlineRentals
+                    is designed around controlled access to the areas
+                    users are responsible for.
+                </p>
+
+                <div class="security-points">
+
+                    <div class="security-point">
+                        ✓ Authenticated user accounts
+                    </div>
+
+                    <div class="security-point">
+                        ✓ Controlled property access
+                    </div>
+
+                    <div class="security-point">
+                        ✓ Role-based responsibilities
+                    </div>
+
+                    <div class="security-point">
+                        ✓ Protected financial information
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="product-card">
+
+                <h3>
+                    Designed around accountability.
+                </h3>
+
+                <p>
+                    Property management becomes easier to understand
+                    when properties, tenants, invoices and transactions
+                    remain connected.
+                </p>
+
+                <p>
+                    OnlineRentals provides a central place to organize
+                    those records and support day-to-day decisions.
+                </p>
+
+                <a
+                    href="#how-it-works"
+                    class="btn btn-secondary"
+                    style="margin-top:10px;"
+                >
+                    Explore the workflow
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section class="section" id="faq">
+
+    <div class="container">
+
+        <div class="section-heading center">
+
+            <div class="section-label">
+                Frequently asked questions
+            </div>
+
+            <h2>
+                Questions about OnlineRentals?
+            </h2>
+
+        </div>
+
+
+        <div class="faq">
+
+            <div class="faq-item">
+
+                <button class="faq-question" type="button">
+                    What is OnlineRentals?
+
+                    <svg width="18" height="18"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="faq-answer">
+                    OnlineRentals is a property management system
+                    designed to bring property, unit, tenant, billing,
+                    payment and financial information together in one
+                    organized platform.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question" type="button">
+                    Can I manage multiple properties?
+
+                    <svg width="18" height="18"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="faq-answer">
+                    OnlineRentals is structured around properties and
+                    their individual units, allowing property information
+                    and rental activity to be organized at property level.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question" type="button">
+                    Can I manage tenants and their units?
+
+                    <svg width="18" height="18"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="faq-answer">
+                    Yes. Tenants can be registered and allocated to
+                    available units, with their rental account information
+                    connected to the relevant property and billing records.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question" type="button">
+                    How does billing work?
+
+                    <svg width="18" height="18"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="faq-answer">
+                    OnlineRentals manages rental invoices and recurring
+                    charges while keeping track of payments, arrears,
+                    prepayments and outstanding balances.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question" type="button">
+                    Can tenants access the system?
+
+                    <svg width="18" height="18"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="faq-answer">
+                    Yes. Tenant access can be controlled so that tenants
+                    can interact with the information and functions
+                    assigned to their accounts.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question" type="button">
+                    How do I access my account?
+
+                    <svg width="18" height="18"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="faq-answer">
+                    Use the Sign In button to access the OnlineRentals
+                    application with your account credentials. If you
+                    have forgotten your password, use the password
+                    recovery option on the login page.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section class="section section-soft" id="about">
+
+    <div class="container">
+
+        <div class="section-heading center">
+
+            <div class="section-label">
+                About OnlineRentals
+            </div>
+
+            <h2>
+                One place for the business of managing property.
+            </h2>
+
+            <p>
+                OnlineRentals is designed to simplify the everyday
+                work behind rental property management by connecting
+                properties, tenants, billing, payments, operations
+                and financial information.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CTA / CONTACT
+========================================================= -->
+
+<section class="cta" id="contact">
+
+    <div class="container">
+
+        <div class="cta-card">
+
+            <h2>
+                Ready to manage your rental business more clearly?
+            </h2>
+
+            <p>
+                Sign in to OnlineRentals or get in touch to learn
+                more about the platform.
+            </p>
+
+            <div class="cta-actions">
+
+                <a
+                    href="{% url 'landlord:auth_view' %}"
+                    class="btn btn-primary"
+                >
+                    Sign In
+                </a>
+
+                <a
+                    href="mailto:goddidenterprises@gmail.com"
+                    class="btn btn-secondary"
+                >
+                    Contact Us
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <a href="#home" class="brand">
+
+                    <span class="brand-mark">
+                        <svg viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <path d="M3 11.5 12 4l9 7.5"/>
+                            <path d="M5.5 10.5V20h13v-9.5"/>
+                            <path d="M9 20v-5h6v5"/>
+                        </svg>
+                    </span>
+
+                    <span>OnlineRentals</span>
+
+                </a>
+
+                <p>
+                    Property management made simple. A connected
+                    platform for managing properties, tenants,
+                    billing, payments and financial information.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Product</h4>
+
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#guides">Guides</a>
+                <a href="#faq">FAQ</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Company</h4>
+
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Account</h4>
+
+                <a href="{% url 'landlord:auth_view' %}">
+                    Sign In
+                </a>
+
+                <a href="#contact">
+                    Get Started
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © {% now "Y" %} OnlineRentals. All rights reserved.
+            </span>
+
+            <span>
+                Property Management System
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+    // Keep the FAQ compact by allowing only one answer to stay open.
+    document.querySelectorAll(".faq-question").forEach(function(button) {
+        button.addEventListener("click", function() {
+            const item = button.closest(".faq-item");
+
+            document.querySelectorAll(".faq-item").forEach(function(other) {
+                if (other !== item) {
+                    other.classList.remove("open");
+                }
+            });
+
+            item.classList.toggle("open");
+        });
+    });
+
+    // Close the expanded menu after a visitor chooses a destination.
+    document.querySelectorAll(".nav-links a").forEach(function(link) {
+        link.addEventListener("click", function() {
+            document
+                .querySelector(".nav-links")
+                .classList.remove("mobile-open");
+        });
+    });
+</script>
+
+<style>
+    @media (max-width: 950px) {
+        .nav-links.mobile-open {
+            display: flex;
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            top: 68px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+            padding: 10px;
+            background: white;
+            border: 1px solid #e4e7ec;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(16,24,40,.12);
+        }
+
+        .nav-links.mobile-open a {
+            padding: 12px;
+        }
+    }
+</style>
+
+</body>
+</html>
