@@ -758,6 +758,31 @@
             flex-shrink: 0;
         }
 
+        .contact-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .contact-numbers a {
+            display: inline-flex;
+            align-items: center;
+            padding: 9px 13px;
+            background: #ffffff;
+            border: 1px solid #e4e7ec;
+            border-radius: 10px;
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: 750;
+            transition: background .2s ease, border-color .2s ease;
+        }
+
+        .contact-numbers a:hover {
+            background: #eff6ff;
+            border-color: #2563eb;
+        }
+
         /* Footer */
 
         .site-footer {
@@ -1678,9 +1703,16 @@
                     <h2>Bring more clarity to property management.</h2>
                     <p>
                         Sign in to continue managing your rental records.
-                        If you need an account or assistance, contact your
-                        organization's system administrator or support contact.
+                        For account access, enquiries or technical support,
+                        contact the OnlineRentals team using the numbers below.
                     </p>
+
+                    <!-- Keep these call links in sync with the support numbers in the footer. -->
+                    <div class="contact-numbers">
+                        <a href="tel:0707407759">0707 407 759</a>
+                        <a href="tel:0790780933">0790 780 933</a>
+                        <a href="tel:0793953336">0793 953 336</a>
+                    </div>
                 </div>
 
                 <div class="cta-actions">
@@ -1733,11 +1765,13 @@
             </div>
 
             <div class="footer-column">
-                <h3>Support</h3>
+                <h3>Contact & Support</h3>
                 <a href="#faq">Frequently Asked Questions</a>
-                <a href="#contact">Getting Help</a>
                 <a href="{% url 'landlord:auth_view' %}">Sign In</a>
-                <p>Contact your organization for account assistance.</p>
+                <p>Call us for enquiries or assistance:</p>
+                <a href="tel:0707407759">0707 407 759</a>
+                <a href="tel:0790780933">0790 780 933</a>
+                <a href="tel:0793953336">0793 953 336</a>
             </div>
 
         </div>
